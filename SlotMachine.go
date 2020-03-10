@@ -1,4 +1,8 @@
-{{/* Slot Machine Game */}}
+{{/* Slot Machine Game
+	Suggested trigger type: Command
+	Trigger text: bet
+	*/}}
+
 
 {{/* USER VARIABLES */}}
 {{$dbName := "CREDITS"}} {{/* Name of the Key of your DB that stores users currency ammount */}}
@@ -16,6 +20,10 @@
 {{$notEnough := "Insuficient credits"}} {{/* Error msg when user doesnt have enough credits to place bet */}}
 {{$betBelow1 := "You have to bet 1 credit at least"}} {{/* Error msg when user try to bet 0 */}}
 {{$bettingChannel := 655082852295376922}} {{/* Channel users can play */}}
+{{$minMax := true}} {{/* Do you want to have a minimum and a maximum amount users can bet? true for yes / false for no */}}
+{{$minBet := 100}} {{/* Minimum amount people can bet */}}
+{{$maxBet := 200}} {{/* Maximum amount people can bet */}}
+{{$outOfRange := "You have to bet between 100 and 200!"}} {{/* Error when user places a bet below or above the min/max bet. */}}
 {{$channels := cslice
 	655082852295376922
 	682204005723799553
@@ -39,17 +47,20 @@
 {{if (and (not .ExecData) (eq .Channel.ID $bettingChannel) (not (dbGet .User.ID "block_slot_123456")))}}
 	{{if .CmdArgs}}
 		{{$bet := toInt (index .CmdArgs 0)}}
-		{{if ge $bet 1}}
-			{{if ge $bal $bet}}
-				{{dbSet .User.ID "block_slot_123456" true}}
-				{{$silent := dbIncr .User.ID $dbName (mult -1 $bet)}}
-				{{$id := sendMessageRetID nil (cembed $embed)}}
-				{{execCC .CCID (index (shuffle $channels) 0) 2 (sdict "depth" 1 "id" $id "bet" $bet)}}
+		{{$ok := true}}{{if $minMax}}{{if (or (lt $bet $minBet) (gt $bet $maxBet))}}{{$ok = false}}{{$outOfRange}}{{end}}{{end}}
+		{{if $ok}}
+			{{if ge $bet 1}}
+				{{if ge $bal $bet}}
+					{{dbSet .User.ID "block_slot_123456" true}}
+					{{$silent := dbIncr .User.ID $dbName (mult -1 $bet)}}
+					{{$id := sendMessageRetID nil (cembed $embed)}}
+					{{execCC .CCID (index (shuffle $channels) 0) 2 (sdict "depth" 1 "id" $id "bet" $bet)}}
+				{{else}}
+					{{joinStr "" $notEnough ", " .User.Mention "!"}}
+				{{end}}
 			{{else}}
-				{{joinStr "" $notEnough ", " .User.Mention "!"}}
+				{{joinStr "" $betBelow1 ", " .User.Mention "!"}}
 			{{end}}
-		{{else}}
-			{{joinStr "" $betBelow1 ", " .User.Mention "!"}}
 		{{end}}
 	{{else}}
 		{{$embedHelp := (cembed
