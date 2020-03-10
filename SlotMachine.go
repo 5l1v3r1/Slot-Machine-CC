@@ -15,7 +15,7 @@
 {{$helpText := "-apostar <quantidade>\nPor exemplo: **-apostar 10**\nAssim você estaria apostando 10 créditos."}} {{/* Your helper text */}}
 {{$notEnough := "Você não tem créditos suficientes"}} {{/* Error msg when user doesnt have enough credits to place bet */}}
 {{$betBelow1 := "Você só pode fazer apostas de, no mínimo, 1 crédito"}} {{/* Error msg when user try to bet 0 */}}
-{{$bettingChannel := 655082852295376922}} {{/* Channel users can player */}}
+{{$bettingChannel := 655082852295376922}} {{/* Channel users can play */}}
 {{$channels := cslice
 	655082852295376922
 	682204005723799553
