@@ -1,20 +1,20 @@
 {{/* Slot Machine Game */}}
 
 {{/* USER VARIABLES */}}
-{{$dbName := "CREDITOS"}} {{/* Name of the Key of your DB that stores users currency ammount */}}
-{{$gameName := "Máquina da Sorte"}} {{/* Whatever you want the game to be named */}}
-{{$user := "Usuário"}} {{/* How should the user be called. For example: "player" or "user" */}}
-{{$spinName := "RODANDO"}} {{/* Word to show user that slot machine is currently spinning */}}
-{{$lose := "Você perdeu :("}} {{/* Text to tell user he lost */}}
-{{$win := "VOCÊ GANHOU!"}} {{/* Text to tell user he won */}}
-{{$profit := "Lucro"}} {{/* How should the profit be called */}}
-{{$currency := "Créditos"}} {{/* Name of the currency in your server */}}
-{{$payOut := "Pagamentos"}} {{/* Name of the currency in your server */}}
-{{$youHave := "Você tem "}} {{/* "You have" in your language */}}
-{{$helper := "Modo de uso"}} {{/* Helper text title */}}
-{{$helpText := "-apostar <quantidade>\nPor exemplo: **-apostar 10**\nAssim você estaria apostando 10 créditos."}} {{/* Your helper text */}}
-{{$notEnough := "Você não tem créditos suficientes"}} {{/* Error msg when user doesnt have enough credits to place bet */}}
-{{$betBelow1 := "Você só pode fazer apostas de, no mínimo, 1 crédito"}} {{/* Error msg when user try to bet 0 */}}
+{{$dbName := "CREDITS"}} {{/* Name of the Key of your DB that stores users currency ammount */}}
+{{$gameName := "Slot Machine"}} {{/* Whatever you want the game to be named */}}
+{{$user := "User"}} {{/* How should the user be called. For example: "player" or "user" */}}
+{{$spinName := "SPINNING"}} {{/* Word to show user that slot machine is currently spinning */}}
+{{$lose := "You lost :("}} {{/* Text to tell user he lost */}}
+{{$win := "YOU WON!"}} {{/* Text to tell user he won */}}
+{{$profit := "Profit"}} {{/* How should the profit be called */}}
+{{$currency := "Credits"}} {{/* Name of the currency in your server */}}
+{{$payOut := "Pay Out"}} {{/* Name of the currency in your server */}}
+{{$youHave := "you have "}} {{/* "You have" in your language */}}
+{{$helper := "Usage"}} {{/* Helper text title */}}
+{{$helpText := "-bet <amount>\nFor example: **-bet 10**\nThis way you would be betting 10 credits."}} {{/* Your helper text */}}
+{{$notEnough := "Insuficient credits"}} {{/* Error msg when user doesnt have enough credits to place bet */}}
+{{$betBelow1 := "You have to bet 1 credit at least"}} {{/* Error msg when user try to bet 0 */}}
 {{$bettingChannel := 655082852295376922}} {{/* Channel users can play */}}
 {{$channels := cslice
 	655082852295376922
